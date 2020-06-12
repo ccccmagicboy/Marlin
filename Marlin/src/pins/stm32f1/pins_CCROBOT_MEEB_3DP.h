@@ -145,12 +145,13 @@
   
   #define BEEPER_PIN                        PB5
   
-  #define BTN_EN1                           PA2
+  #define BTN_EN1                           PA4
   #define BTN_EN2                           PA3
   #define BTN_ENC                           PB8
   
   #define NEOPIXEL2_TYPE                    NEO_GRB
-  #define NEOPIXEL2_PIN                     PA4
+  #define NEOPIXEL2_PIN                     PA2
+  
 #endif
 
 // Alter timing for graphical display
