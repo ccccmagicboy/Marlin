@@ -130,7 +130,7 @@
 //
 // LCD / Controller
 //
-#if ENABLED(CR10_STOCKDISPLAY)
+#if EITHER(CR10_STOCKDISPLAY, REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER)
   #define BEEPER_PIN                        PB5
   #define BTN_EN1                           PA2
   #define BTN_EN2                           PA3
