@@ -139,9 +139,10 @@
   #define LCD_PINS_RS                       PB7   // CS -- SOFT SPI for ENDER3 LCD
   #define LCD_PINS_D4                       PB8   // SCLK
   #define LCD_PINS_ENABLE                   PA4   // DATA MOSI
-#elif ENABLED(SAV_3DGLCD)
+#elif ENABLED(U8GLIB_SSD1309)
   #define LCD_SCREEN_ROT_180
-  #define U8GLIB_SH1106
+  //#define U8GLIB_SH1106
+  //#define IS_U8GLIB_SSD1306
   
   #define BEEPER_PIN                        PB5
   
