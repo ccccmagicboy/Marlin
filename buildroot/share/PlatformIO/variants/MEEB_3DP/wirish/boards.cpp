@@ -101,7 +101,7 @@ static void setup_flash(void) {
     flash_enable_features(FLASH_PREFETCH | FLASH_ICACHE | FLASH_DCACHE);
     // Configure the wait states, assuming we're operating at "close
     // enough" to 3.3V.
-    flash_set_latency(FLASH_SAFE_WAIT_STATES);
+    flash_set_latency(FLASH_WAIT_STATE_0);
 }
 
 static void setup_clocks(void) {
