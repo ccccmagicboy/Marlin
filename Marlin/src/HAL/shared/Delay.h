@@ -31,29 +31,35 @@
 
 #include "../../core/macros.h"
 
+#define  DWT_CR      *(volatile uint32_t *)0xE0001000
+#define  DWT_CYCCNT  *(volatile uint32_t *)0xE0001004
+#define  DEM_CR      *(volatile uint32_t *)0xE000EDFC
+#define  DWT_LAR     *(volatile uint32_t *)0xE0001FB0
+#define  DEM_CR_TRCENA                   (1 << 24)
+#define  DWT_CR_CYCCNTENA                (1 <<  0)
+
 #if defined(__arm__) || defined(__thumb__)
 
-  #if __CORTEX_M == 7
+  //#if __CORTEX_M == 7
+  #if 1  
 
     // Cortex-M3 through M7 can use the cycle counter of the DWT unit
     // http://www.anthonyvh.com/2017/05/18/cortex_m-cycle_counter/
-
+    
     FORCE_INLINE static void enableCycleCounter() {
-      CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
-
+        DEM_CR         |=  DEM_CR_TRCENA;
       #if __CORTEX_M == 7
-        DWT->LAR = 0xC5ACCE55; // Unlock DWT on the M7
+        DWT_LAR = 0xC5ACCE55; // Unlock DWT on the M7
       #endif
-
-      DWT->CYCCNT = 0;
-      DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
+        DWT_CYCCNT      = 0;
+        DWT_CR         |= DWT_CR_CYCCNTENA;
     }
 
-    FORCE_INLINE volatile uint32_t getCycleCount() { return DWT->CYCCNT; }
+    FORCE_INLINE volatile uint32_t getCycleCount() { return DWT_CYCCNT; }
 
     FORCE_INLINE static void DELAY_CYCLES(const uint32_t x) {
-      const uint32_t endCycles = getCycleCount() + x;
-      while (PENDING(getCycleCount(), endCycles)) {}
+      DWT_CYCCNT      = 0;
+      while(getCycleCount() < x);        //等到计数到所需延时值的cpu时钟数值
     }
 
   #else

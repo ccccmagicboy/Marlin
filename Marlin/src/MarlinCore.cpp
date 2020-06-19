@@ -893,6 +893,7 @@ void setup() {
     SERIAL_ECHO_MSG("start");
   #endif
 
+  enableCycleCounter();
   SETUP_RUN(HAL_init());
 
   #if HAS_L64XX
