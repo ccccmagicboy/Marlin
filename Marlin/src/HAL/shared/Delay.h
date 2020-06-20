@@ -59,7 +59,10 @@
 
     FORCE_INLINE static void DELAY_CYCLES(const uint32_t x) {
       DWT_CYCCNT      = 0;
-      while(getCycleCount() < x);        //等到计数到所需延时值的cpu时钟数值
+      do {
+      asm volatile("nop");
+      asm volatile("nop");
+      }while(getCycleCount() < x);
     }
 
   #else
