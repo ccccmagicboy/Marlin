@@ -139,15 +139,13 @@
   #define LCD_PINS_RS                       PB7   // CS -- SOFT SPI for ENDER3 LCD
   #define LCD_PINS_D4                       PB8   // SCLK
   #define LCD_PINS_ENABLE                   PA4   // DATA MOSI
-#elif ENABLED(U8GLIB_SSD1309)
+#elif EITHER(U8GLIB_SSD1306, U8GLIB_SH1106)
   #define LCD_SCREEN_ROT_180
-  //#define U8GLIB_SH1106
-  //#define IS_U8GLIB_SSD1306
   
   #define BEEPER_PIN                        PB5
   
-  #define BTN_EN1                           PA4
-  #define BTN_EN2                           PA3
+  #define BTN_EN1                           PA3
+  #define BTN_EN2                           PA4
   #define BTN_ENC                           PB8
   
   #define NEOPIXEL2_TYPE                    NEO_GRB
