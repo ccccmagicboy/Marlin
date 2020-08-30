@@ -130,7 +130,7 @@
 //
 // LCD / Controller
 //
-#if ENABLED(CR10_STOCKDISPLAY)
+#if EITHER(CR10_STOCKDISPLAY, REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER)
   #define BEEPER_PIN                        PB5
   #define BTN_EN1                           PA2
   #define BTN_EN2                           PA3
@@ -139,6 +139,22 @@
   #define LCD_PINS_RS                       PB7   // CS -- SOFT SPI for ENDER3 LCD
   #define LCD_PINS_D4                       PB8   // SCLK
   #define LCD_PINS_ENABLE                   PA4   // DATA MOSI
+#elif ENABLED(OLED_KIT_MEEB3DP)
+  
+  #define LCD_SCREEN_ROT_180
+  
+  #define BEEPER_PIN                        PB5
+  
+  #define BTN_EN1                           PA3
+  #define BTN_EN2                           PA4
+  #define BTN_ENC                           PB8
+  
+  #if ENABLED(POWER_MONITOR_CURRENT)              // pin PA2 is multi-functions, and select by a jumper on OLED_KIT for MEEB3DP
+    #define POWER_MONITOR_CURRENT_PIN         PA2
+  #else
+    #define NEOPIXEL2_PIN                     PA2
+  #endif
+  
 #endif
 
 // Alter timing for graphical display
